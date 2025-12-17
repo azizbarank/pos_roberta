@@ -1,4 +1,5 @@
 import torch
+import matplotlib.pyplot as plt
 from src.data import load_corpus, get_tokenizer, tokenize_and_align_labels, create_dataloaders
 from src.model import POSTagger
 from src.train import train
@@ -24,6 +25,14 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     accuracy = evaluate(model, val_loader, device)
     print(f"Validation accuracy: {accuracy:.4f}")
+
+    plt.plot(train_losses, label="train")
+    plt.plot(val_losses, label="validation")
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.legend()
+    plt.savefig("learning_curve.png")
+    plt.close()
 
 
 if __name__ == "__main__":
