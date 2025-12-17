@@ -11,3 +11,6 @@ wheels/
 
 # Project plan
 plan.md
+
+# Generated images
+*.png
